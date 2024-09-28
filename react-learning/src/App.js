@@ -1,8 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Header from "./Header/header";
-import ClassBasedExample from "./ClassBasedExample";
-import FunctionalBasedExample from "./FunctionalBasedExample";
+import ClassBasedExample from "./Practice/ClassBasedExample";
+import FunctionalBasedExample from "./Practice/FunctionalBasedExample";
 function App() {
   return (
     <div className="App">
@@ -20,7 +19,6 @@ function App() {
           Learn React
         </a>
       </header>
-      <Header />
       <ClassBasedExample />
       <FunctionalBasedExample />
     </div>
