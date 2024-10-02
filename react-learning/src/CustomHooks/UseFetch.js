@@ -2,31 +2,22 @@ import { useEffect, useState } from "react";
 
 const useFetch = (url) => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchDataFromApi(url) {
-            try {
-                const response = await fetch(url);
-                setLoading(true);
-                const result = await response.json()
-                if (result) {
-                    setData(response);
-                    console.log('dataaa', response)
-                }
-                else {
-                    setLoading(false);
-                }
-
-            }
-            catch {
-                console.log('eror')
-            }
-
-
+        try {
+            fetch(url).then(response => response.json())
+                .then(data => setData({ data }))
+            console.log('data', data)
         }
-        fetchDataFromApi();
-    }, [url])
-    return (data, loading)
+        catch (error) {
+            console.log('Error fetching data', error);
+        }
+        finally {
+            setLoading(false)
+        }
+    }
+        , [url])
+    return { data, loading }
 }
 export default useFetch;

@@ -1,4 +1,5 @@
 import "./App.css";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MyProvider from "./CustomComponents/MyProvider";
 import ClassBasedExample from "./Practice/ClassBasedExample";
 import FunctionalBasedExample from "./Practice/FunctionalBasedExample";
@@ -8,10 +9,13 @@ function App() {
   return (
     <div className="App">
       <h1>React Practice Page</h1>
-      <ClassBasedExample />
-      <MyProvider>
-        <FunctionalBasedExample />
-      </MyProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/functionalComponent' element={<FunctionalBasedExample />} />
+          <Route path='/functionalComponent' element={<ClassBasedExample />} />
+        </Routes>
+      </BrowserRouter>
+
       {/* <PropDrilling /> */}
     </div>
   );

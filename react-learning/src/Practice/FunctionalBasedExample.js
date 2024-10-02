@@ -7,7 +7,7 @@ import FocusInput from "./FocusInput";
 import CounterRef from "./CounterRef";
 import MyInput from "./Forwardref";
 import Form from "./Form";
-import useFetch from "../CustomHooks/UseFetch";
+import useFetch from "../CustomHooks/useFetch";
 import '../../src/styles.css'
 function PropsExample(props) {
   return (
@@ -39,7 +39,7 @@ function FunctionalBasedExample() {
   }, []);
   const counterRef = useRef(0);
   const inputForwardRef = useRef(null);
-  const { data, loading } = useFetch("https://api.github.com/user")
+  const { data, loading } = useFetch("https://jsonplaceholder.typicode.com/users")
   console.log(data, loading, 'mamta')
   const incrementCountUsingRef = () => {
     console.log(counterRef.current);
@@ -89,6 +89,9 @@ function FunctionalBasedExample() {
           <MyInput ref={inputForwardRef} handleForwardRef={handleForwardRef} />
           {/* simple form */}
           <Form />
+          {/* useFetch custom hook and data fetching  */}
+          {loading && <h3>loading....</h3>}
+          {data && data.length}
         </div>
 
 
