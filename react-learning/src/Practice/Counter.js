@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "../Custom/Container";
+import Container from "../CustomComponents/Container";
 
 function Counter({ count, incrementCount }) {
   return (

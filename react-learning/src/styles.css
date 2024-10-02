@@ -1,0 +1,15 @@
+.mainContianer {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    /* padding: 20px; */
+}
+
+.subContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    padding: 20px;
+}

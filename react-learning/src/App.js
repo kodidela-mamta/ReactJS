@@ -1,4 +1,5 @@
 import "./App.css";
+import MyProvider from "./CustomComponents/MyProvider";
 import ClassBasedExample from "./Practice/ClassBasedExample";
 import FunctionalBasedExample from "./Practice/FunctionalBasedExample";
 import PropDrilling from "./Practice/PropDrilling";
@@ -8,7 +9,9 @@ function App() {
     <div className="App">
       <h1>React Practice Page</h1>
       <ClassBasedExample />
-      <FunctionalBasedExample />
+      <MyProvider>
+        <FunctionalBasedExample />
+      </MyProvider>
       {/* <PropDrilling /> */}
     </div>
   );
