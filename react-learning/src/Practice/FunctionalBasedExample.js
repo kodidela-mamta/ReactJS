@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import Counter from "./Counter";
 import FormsHandling from "./FormsHandling";
 import DataFetching from "./DataFetching";
@@ -8,7 +9,9 @@ import CounterRef from "./CounterRef";
 import MyInput from "./Forwardref";
 import Form from "./Form";
 import useFetch from "../CustomHooks/useFetch";
-import '../../src/styles.css'
+import "../../src/styles.css";
+import ComponentRender from "../CustomComponents/ComponentRender";
+
 function PropsExample(props) {
   return (
     <div style={{ display: "flex", gap: "10px" }}>
@@ -26,6 +29,11 @@ function ArrayRendering(props) {
     </div>
   );
 }
+function DataFetchRender(props){
+  return(
+    <div style={{ display: 'flex' }}>{props.data && props.data.map((obj) => <p>{obj.id}{',  '}</p>)}</div>
+  )
+}
 function FunctionalBasedExample() {
   let array = [1, 2, 3, 4, 5];
   const [count, setCounter] = useState(0);
@@ -39,8 +47,10 @@ function FunctionalBasedExample() {
   }, []);
   const counterRef = useRef(0);
   const inputForwardRef = useRef(null);
-  const { data, loading } = useFetch("https://jsonplaceholder.typicode.com/users")
-  console.log(data, loading, 'mamta')
+  const { data, loading } = useFetch(
+    "https://jsonplaceholder.typicode.com/users"
+  );
+  console.log(data, loading, "mamta");
   const incrementCountUsingRef = () => {
     console.log(counterRef.current);
     setIncrementCount((counterRef.current = counterRef.current + 1));
@@ -55,47 +65,44 @@ function FunctionalBasedExample() {
   const handleForwardRef = () => {
     inputForwardRef.current.focus();
   };
+  const navigate = useNavigate();
+  function handleRedirect() {
+    navigate(`/classComponent`)
+  }
   return (
     <>
       <h3>Functional Based Examples</h3>
-      <div className="mainContianer">
+      <button onClick={handleRedirect}>Go to Class Component Example Page</button>
+      {/* <Navigation /> */}
+      <div className="mainContainer">
         <div className="subContainer">
-          <PropsExample name="mamta" />
-          {/*   default props are used for default value for null name , here name props didn't have value so default used */}
-          <Counter count={count} incrementCount={handleClick} />
-          {/* render list if items  */}
-          <ArrayRendering array={array} />
-          {/* handle input example component */}
-          <FormsHandling
+          <ComponentRender title='Props' description='default props are used for default value for null name , here name props did not have value so default used' componentRender={<PropsExample name="mamta" />} />
+          <ComponentRender title='Counter' componentRender={<Counter count={count} incrementCount={handleClick} />}/>
+          <ComponentRender title='render list if items' description='render list if items' componentRender={<ArrayRendering array={array} />} />
+          <ComponentRender title='handle input example component' description='handle input example component' componentRender={
+            <FormsHandling
             name={name}
             handleChange={(e) => handleInput(e.target.value)}
-          />
-          {/* // Data Fetching Example  */}
-          <DataFetching />
+          />} />
+          <ComponentRender title='Data Fetching Example' description='Data Fetching Example' componentRender={<DataFetching />} />
+          <ComponentRender title='useFetch custom hook and data fetching' description='useFetch custom hook and data fetching' componentRender=
+{<DataFetchRender />} />
         </div>
 
         <div className="subContainer">
+          <ComponentRender title='useref example' description='useref example' componentRender={<FocusInput />} />
           {/* <PropDrilling  /> */}
           {/* context api example  */}
           {/* <ContextApi /> */}
-          {/* useref example  */}
-          <FocusInput />
-          {/* count increment using useRef  */}
-          <CounterRef
+          <ComponentRender title='count increment using useRef' description='count increment using useRef' componentRender={<CounterRef
             counterRef={incrementCount}
             incrementCountUsingRef={incrementCountUsingRef}
-          />
-          {/* count increment using forwardRef  */}
-          <MyInput ref={inputForwardRef} handleForwardRef={handleForwardRef} />
-          {/* simple form */}
-          <Form />
-          {/* useFetch custom hook and data fetching  */}
-          {loading && <h3>loading....</h3>}
-          {data && data.length}
+          />} />
+          <ComponentRender title='count increment using forwardRef' description='count increment using forwardRef' componentRender={<MyInput ref={inputForwardRef} handleForwardRef={handleForwardRef} />} />
+          <ComponentRender title='simple form' description='Simple form' componentRender={<Form />} />
         </div>
-
-
-      </div></>
+      </div>
+    </>
   );
 }
 PropsExample.defaultProps = {
