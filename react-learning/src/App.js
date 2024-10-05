@@ -1,9 +1,7 @@
 
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import MyProvider from "./CustomComponents/MyProvider";
 import ClassBasedExample from "./Practice/ClassBasedExample";
 import FunctionalBasedExample from "./Practice/FunctionalBasedExample";
-import PropDrilling from "./Practice/PropDrilling";
 import User from './Practice/User';
 import './App.css'
 
