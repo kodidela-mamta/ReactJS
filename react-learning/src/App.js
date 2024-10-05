@@ -2,21 +2,26 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ClassBasedExample from "./Practice/ClassBasedExample";
 import FunctionalBasedExample from "./Practice/FunctionalBasedExample";
-import User from './Practice/User';
 import './App.css'
+import Navbar from './Practice/Navbar';
+import Shop from './Practice/Shop';
 
 function App() {
 
   return (
     <div className="App">
-      <h1>React Practice Page</h1>
       <BrowserRouter>
         <Routes>
           <Route path='/functionalComponent' element={<FunctionalBasedExample />} />
           <Route path='/classComponent' element={<ClassBasedExample />} />
-          <Route path='/User/:userId' element={<User />} />
+          {/* <Route path='/Navbar' element={<Navbar />} />
+          <Route path='/Shop' element={<Shop />} /> */}
         </Routes>
       </BrowserRouter>
+      <Navbar />
+      <div className='container'>
+        <Shop />
+      </div>
     </div>
   );
 }
