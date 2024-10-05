@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import Counter from "./Counter";
 import FormsHandling from "./FormsHandling";
-import DataFetching from "./DataFetching";
 import FocusInput from "./FocusInput";
 import CounterRef from "./CounterRef";
 import MyInput from "./ForwardRef";
@@ -31,11 +30,7 @@ function ArrayRendering(props) {
     </div>
   );
 }
-function DataFetchRender(props) {
-  return (
-    <div style={{ display: 'flex' }}>{props.data && props.data.map((obj) => <p>{obj.id}{',  '}</p>)}</div>
-  )
-}
+
 function FunctionalBasedExample({ expensiveCalculation }) {
   let array = [1, 2, 3, 4, 5];
   const [count, setCounter] = useState(0);
@@ -49,7 +44,7 @@ function FunctionalBasedExample({ expensiveCalculation }) {
   }, []);
   const counterRef = useRef(0);
   const inputForwardRef = useRef(null);
-  const { data, loading } = useFetch(
+  const { data } = useFetch(
     "https://jsonplaceholder.typicode.com/users"
   );
   const navigate = useNavigate();
@@ -87,9 +82,9 @@ function FunctionalBasedExample({ expensiveCalculation }) {
               name={name}
               handleChange={(e) => handleInput(e.target.value)}
             />} />
-          <ComponentRender title='Data Fetching Example' description='Data Fetching Example' componentRender={<DataFetching />} />
           <ComponentRender title='useFetch custom hook and data fetching' description='useFetch custom hook and data fetching' componentRender=
-            {<DataFetchRender />} />
+            {<div style={{ display: 'flex' }}>{data && data.map((obj) => <p>{obj.id}{',  '}</p>)}</div>
+            } />
         </div>
         <div className="subContainer">
           <ComponentRender title='useRef example' description='useRef example' componentRender={<FocusInput />} />

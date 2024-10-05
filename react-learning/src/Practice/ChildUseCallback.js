@@ -4,7 +4,7 @@ const ChildCallback = ({ calculateNumber }) => {
     const [row, setRow] = useState([])
 
     useEffect(() => {
-        console.log('child called in usecallback');
+        console.log('child called in useCallback');
         setRow(calculateNumber)
     }, [calculateNumber])
     return (

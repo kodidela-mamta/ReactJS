@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ClassBasedExample from "./Practice/ClassBasedExample";
 import FunctionalBasedExample from "./Practice/FunctionalBasedExample";
 import User from './Practice/User';
@@ -17,8 +17,6 @@ function App() {
           <Route path='/User/:userId' element={<User />} />
         </Routes>
       </BrowserRouter>
-
-      {/* <PropDrilling /> */}
     </div>
   );
 }
