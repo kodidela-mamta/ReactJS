@@ -13,6 +13,7 @@ import UseCallback from "./UseCallback";
 import UseMemo from "./UseMemo";
 import MemoComponent from "./MemoComponent";
 import ContextApi from "./ContextApi";
+import PropDrilling from "./PropDrilling";
 
 function PropsExample(props) {
   return (
@@ -83,6 +84,12 @@ function FunctionalBasedExample() {
             title="Counter"
             componentRender={
               <Counter count={count} incrementCount={handleClick} />
+            }
+          />
+          <ComponentRender
+            title="Prop Drilling"
+            componentRender={
+              <PropDrilling />
             }
           />
           <ComponentRender
