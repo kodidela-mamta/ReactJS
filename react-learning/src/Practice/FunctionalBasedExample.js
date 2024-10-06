@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from "react-router-dom";
 import Counter from "./Counter";
 import FormsHandling from "./FormsHandling";
 import FocusInput from "./FocusInput";
@@ -12,6 +12,7 @@ import ComponentRender from "../CustomComponents/ComponentRender";
 import UseCallback from "./UseCallback";
 import UseMemo from "./UseMemo";
 import MemoComponent from "./MemoComponent";
+import ContextApi from "./ContextApi";
 
 function PropsExample(props) {
   return (
@@ -31,7 +32,7 @@ function ArrayRendering(props) {
   );
 }
 
-function FunctionalBasedExample({ expensiveCalculation }) {
+function FunctionalBasedExample() {
   let array = [1, 2, 3, 4, 5];
   const [count, setCounter] = useState(0);
   const [incrementCount, setIncrementCount] = useState(0);
@@ -44,12 +45,10 @@ function FunctionalBasedExample({ expensiveCalculation }) {
   }, []);
   const counterRef = useRef(0);
   const inputForwardRef = useRef(null);
-  const { data } = useFetch(
-    "https://jsonplaceholder.typicode.com/users"
-  );
-  const navigate = useNavigate();
+  const { data } = useFetch("https://jsonplaceholder.typicode.com/users");
+  // const navigate = useNavigate();
   function handleRedirect() {
-    navigate(`/classComponent`)
+    // navigate(`/classComponent`);
   }
   const incrementCountUsingRef = () => {
     console.log(counterRef.current);
@@ -66,38 +65,110 @@ function FunctionalBasedExample({ expensiveCalculation }) {
     inputForwardRef.current.focus();
   };
 
-
   return (
     <>
       <h3>Functional Based Examples</h3>
-      <button onClick={handleRedirect}>Go to Class Component Example Page</button>
+      <button onClick={handleRedirect}>
+        Go to Class Component Example Page
+      </button>
       {/* <Navigation /> */}
       <div className="mainContainer">
         <div className="subContainer">
-          <ComponentRender title='Props' description='default props are used for default value for null name , here name props did not have value so default used' componentRender={<PropsExample name="Props" />} />
-          <ComponentRender title='Counter' componentRender={<Counter count={count} incrementCount={handleClick} />} />
-          <ComponentRender title='render list if items' description='render list if items' componentRender={<ArrayRendering array={array} />} />
-          <ComponentRender title='handle input example component' description='handle input example component' componentRender={
-            <FormsHandling
-              name={name}
-              handleChange={(e) => handleInput(e.target.value)}
-            />} />
-          <ComponentRender title='useFetch custom hook and data fetching' description='useFetch custom hook and data fetching' componentRender=
-            {<div style={{ display: 'flex' }}>{data && data.map((obj) => <p>{obj.id}{',  '}</p>)}</div>
-            } />
+          <ComponentRender
+            title="Props"
+            description="Default props are used for default value for null name , here name props did not have value so default used"
+            componentRender={<PropsExample name="Props" />}
+          />
+          <ComponentRender
+            title="Counter"
+            componentRender={
+              <Counter count={count} incrementCount={handleClick} />
+            }
+          />
+          <ComponentRender
+            title="Context Api Example"
+            description={'Context api is used to avoid prop drilling, or alternative and effective way of data sharing between components'}
+            componentRender={
+              <ContextApi />
+            }
+          />
+          <ComponentRender
+            title="Render list if items"
+            description="Render list if items"
+            componentRender={<ArrayRendering array={array} />}
+          />
+          <ComponentRender
+            title="Handle input example component"
+            description="Handle input example component"
+            componentRender={
+              <FormsHandling
+                name={name}
+                handleChange={(e) => handleInput(e.target.value)}
+              />
+            }
+          />
+          <ComponentRender
+            title="UseFetch custom hook and data fetching"
+            description="UseFetch custom hook and data fetching"
+            componentRender={
+              <div style={{ display: "flex" }}>
+                {data &&
+                  data.map((obj) => (
+                    <p>
+                      {obj.id}
+                      {",  "}
+                    </p>
+                  ))}
+              </div>
+            }
+          />
         </div>
         <div className="subContainer">
-          <ComponentRender title='useRef example' description='useRef example' componentRender={<FocusInput />} />
-          <ComponentRender title='count increment using useRef' description='count increment using useRef' componentRender={<CounterRef
-            counterRef={incrementCount}
-            incrementCountUsingRef={incrementCountUsingRef}
-          />} />
-          <ComponentRender title='count increment using forwardRef' description='count increment using forwardRef' componentRender={<MyInput ref={inputForwardRef} handleForwardRef={handleForwardRef} />} />
-          <ComponentRender title='simple form' description='Simple form' componentRender={<Form />} />
-          <ComponentRender title='UseCallback' description='UseCallback is used to memoize functions,in above example component update and render only when function dependency value updates , when toggle happens function is not updated because of useCallback' componentRender={<UseCallback />} />
-          <ComponentRender title='UseMemo' description='UseMemo is used to memoize value,in above example component update and render only when value updates , when toggle happens value is not updated because of useMemo' componentRender={<UseMemo />} />
-          <ComponentRender title='React.Memo' description=' ' componentRender={<MemoComponent />} />
-
+          <ComponentRender
+            title="UseRef example"
+            description="UseRef example"
+            componentRender={<FocusInput />}
+          />
+          <ComponentRender
+            title="Count increment using useRef"
+            description="Count increment using useRef"
+            componentRender={
+              <CounterRef
+                counterRef={incrementCount}
+                incrementCountUsingRef={incrementCountUsingRef}
+              />
+            }
+          />
+          <ComponentRender
+            title="Count increment using forwardRef"
+            description="Count increment using forwardRef"
+            componentRender={
+              <MyInput
+                ref={inputForwardRef}
+                handleForwardRef={handleForwardRef}
+              />
+            }
+          />
+          <ComponentRender
+            title="Simple form"
+            description="Simple form"
+            componentRender={<Form />}
+          />
+          <ComponentRender
+            title="UseCallback"
+            description="UseCallback is used to memoize functions,in above example component update and render only when function dependency value updates , when toggle happens function is not updated because of useCallback"
+            componentRender={<UseCallback />}
+          />
+          <ComponentRender
+            title="UseMemo"
+            description="UseMemo is used to memoize value,in above example component update and render only when value updates , when toggle happens value is not updated because of useMemo"
+            componentRender={<UseMemo />}
+          />
+          <ComponentRender
+            title="React.Memo"
+            description=" "
+            componentRender={<MemoComponent />}
+          />
         </div>
       </div>
     </>
